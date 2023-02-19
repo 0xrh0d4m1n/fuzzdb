@@ -1,9 +1,6 @@
 name: Sync Upstream
 
 env:
-  # Set vars env
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
-  
   # Auth
   WORKFLOW_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
@@ -15,9 +12,6 @@ env:
   MERGE_ARGS: ""
   PUSH_ARGS: ""
   SPAWN_LOGS: "false"
-  
-  # Testing
-  #FORK_BASE: ${{ vars.GITHUB_REPOSITORY }}
 
 on:
   # Run Everyday 00:00
@@ -30,9 +24,6 @@ jobs:
   syncing-downstream:
     runs-on: ubuntu-latest
     steps:
-      - name: Use variables
-        run: |
-          echo "repository: ${{ vars.GITHUB_REPOSITORY }}"
       - name: Syncing Downstream to Upstream Repository
         uses: dabreadman/sync-upstream-repo@v1.3.0
         with: 
