@@ -3,16 +3,18 @@ name: Sync Upstream
 env:
   # Auth
   WORKFLOW_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  FORK_BASE: ${{ vars.GITHUB_REPOSITORY }}
   
   # Settings
-  #UPSTREAM_URL: "https://github.com/${{ }}.git"
+  UPSTREAM_URL: "https://github.com/fuzzdb-project/fuzzdb.git"
   UPSTREAM_BRANCH: "master"
   DOWNSTREAM_BRANCH: "master"
   FETCH_ARGS: ""
   MERGE_ARGS: ""
   PUSH_ARGS: ""
   SPAWN_LOGS: "false"
+  
+  # Testing
+  #FORK_BASE: ${{ vars.GITHUB_REPOSITORY }}
 
 on:
   # Run Everyday 00:00
@@ -25,11 +27,13 @@ jobs:
   syncing-downstream:
     runs-on: ubuntu-latest
     steps:
+      - name: Use variables
+        run: |
+          echo "repository: ${{ vars.GITHUB_REPOSITORY }}"
       - name: Syncing Downstream to Upstream Repository
         uses: dabreadman/sync-upstream-repo@v1.3.0
         with: 
-          #upstream_repo: ${{ env.UPSTREAM_URL }}
-          upstream_repo: "https://github.com/${{ env.FORK_BASE }}.git"
+          upstream_repo: ${{ env.UPSTREAM_URL }}
           upstream_branch: ${{ env.UPSTREAM_BRANCH }}
           downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
           token: ${{ env.WORKFLOW_TOKEN }}
