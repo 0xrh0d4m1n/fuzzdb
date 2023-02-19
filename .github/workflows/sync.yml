@@ -1,6 +1,9 @@
 name: Sync Upstream
 
 env:
+  # Set vars env
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+  
   # Auth
   WORKFLOW_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
