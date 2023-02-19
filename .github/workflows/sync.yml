@@ -5,7 +5,7 @@ env:
   WORKFLOW_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
   # Settings
-  UPSTREAM_URL: "https://github.com/${{ vars.GITHUB_REPOSITORY }}.git"
+  UPSTREAM_URL: "https://github.com/$GITHUB_REPOSITORY.git"
   UPSTREAM_BRANCH: "master"
   DOWNSTREAM_BRANCH: "master"
   FETCH_ARGS: ""
