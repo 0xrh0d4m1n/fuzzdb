@@ -3,9 +3,10 @@ name: Sync Upstream
 env:
   # Auth
   WORKFLOW_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  FORK_BASE: ${{ vars.GITHUB_REPOSITORY }}
   
   # Settings
-  UPSTREAM_URL: "https://github.com/$GITHUB_REPOSITORY.git"
+  #UPSTREAM_URL: "https://github.com/${{ }}.git"
   UPSTREAM_BRANCH: "master"
   DOWNSTREAM_BRANCH: "master"
   FETCH_ARGS: ""
@@ -27,7 +28,8 @@ jobs:
       - name: Syncing Downstream to Upstream Repository
         uses: dabreadman/sync-upstream-repo@v1.3.0
         with: 
-          upstream_repo: ${{ env.UPSTREAM_URL }}
+          #upstream_repo: ${{ env.UPSTREAM_URL }}
+          upstream_repo: "https://github.com/${{ env.FORK_BASE }}.git"
           upstream_branch: ${{ env.UPSTREAM_BRANCH }}
           downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
           token: ${{ env.WORKFLOW_TOKEN }}
